@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name = "Keywords" content="">
+	<meta name = "Description" content="">
+	<title>旋转相册</title>
+	<style type="text/css">
+	    *{margin:0; padding:0;}
+	body:{background:#000; overflow:hidden;}
+	#perspective{perspective:800px;}
+	#wrap{width: 133px; height:200px; border: 1px solid red; 
+		  margin: 150px auto; position: relative;
+		  transform-style: preserve-3d;
+		  transform: rotateX(-10deg) rotateY(0deg);}
+	#wrap img{position: absolute; width: 133px; height: 200px;
+		      transition: 1s;}
+
+
+
+</style>
+	
+</head>
+
+<body>
+  <div id="perspective">
+  	<div id ="wrap">
+  		<img src="images/1.jpg" alt="">
+  		<img src="images/2.jpg" alt="">
+  		<img src="images/3.jpg" alt="">
+  		<img src="images/4.jpg" alt="">
+  		<img src="images/5.jpg" alt="">
+  		<img src="images/6.jpg" alt="">
+  		<img src="images/7.jpg" alt="">
+  		<img src="images/8.jpg" alt="">
+  		<img src="images/9.jpg" alt="">
+  		<img src="images/10.jpg" alt="">
+  		<img src="images/11.jpg" alt="">
+  	</div>
+
+  </div>
+  <script type="text/javascript">
+        var oImg=document.getElementsByTagName("img");
+  	    var deg=360/oImg.length;
+  	    
+     	window.onload =function(){
+   for (var i=0;i<oImg.length;i++){
+  		oImg[i].style.transform="rotateY("+deg*i+"deg) translateZ(350px)";
+  		oImg[i].style.transition="1s "+(oImg.length-i)*0.1+"s";
+  	}	
+  	}
+  	var newX,newY,sX,sY,lX,lY ,rotateX = -10,rotateY = 0;
+  	var oWrap =document.getElementById("wrap");
+  	document.onmousedown = function(event){
+  		lX =event.clientX;
+  		lY =event.clientY;
+  	
+     this.onmousemove = function(event){
+     	 newX = event.clientX;
+         newY = event.clientY;
+
+         sX =newX-lX;
+         sY =newY-lY;
+
+         rotateX-= sY*0.2;
+         rotateY+= sX*0.1;
+
+         oWrap.style.transform = "rotateX("+rotateX+"deg) rotateY("+rotateY+"deg)";
+
+         lX =newX;
+         lY =newY;
+
+     }
+      this.onmouseup = function(event){
+      	 this.onmousemove = null;
+
+     }
+  	}
+  </script>
+	
+</body>
+</html>
